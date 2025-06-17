@@ -2,14 +2,14 @@ import { enableStickyHeader, enableFloatingFooter, enableHamburgerMenu, createEx
 import { ComboBox } from 'https://shankarbus.github.io/kaadu-ui/combo-box.js';
 import { createArvCalculator } from './dates/arv.js';
 import { createEddCalculator } from './dates/edd.js';
+import { createWeightCalculator } from './anthropometry/weight.js';
+import { createHeightCalculator } from './anthropometry/height.js';
 
 enableStickyHeader();
 enableFloatingFooter();
 enableHamburgerMenu();
 setupMessagePopup();
 
-const arvCard = document.getElementById('arvCard');
-const eddCard = document.getElementById('eddCard');
 const calcListColumn = document.getElementById('calcListColumn');
 const calcUIColumn = document.getElementById('calcUIColumn');
 const backBtn = document.getElementById('backBtn');
@@ -30,18 +30,19 @@ function showCalculator(calcName) {
         values = createArvCalculator();
     } else if (calcName === 'edd') {
         values = createEddCalculator();
+    } else if (calcName === 'weight') {
+        values = createWeightCalculator();
+    } else if (calcName === 'height') {
+        values = createHeightCalculator();
+    } else {
+        showMessagePopup('Error', 'Calculator not found.');
+        return;
     }
+
     calcTitle.textContent = values.title;
     calcSubGroup.appendChild(values.calcUI);
     window.history.pushState({ calcName: calcName }, '', `?calc=${calcName}`);
 }
-
-arvCard.addEventListener('click', () => {
-    showCalculator('arv');
-});
-eddCard.addEventListener('click', () => {
-    showCalculator('edd');
-});
 
 window.onpopstate = function () {
     showMainMenu();
@@ -61,3 +62,24 @@ function handleInitialCalcFromURL() {
 }
 
 handleInitialCalcFromURL();
+
+const calcMap = {
+    'arv': 'arvCard',
+    'edd': 'eddCard',
+    'weight': 'wtCard',
+    'height': 'htCard'
+};
+
+function mapCalcsToCard() {
+    Object.keys(calcMap).forEach(calcName => {
+        const cardId = calcMap[calcName];
+        if (cardId) {
+            const card = document.getElementById(cardId);
+            if (card) {
+                card.addEventListener('click', () => showCalculator(calcName));
+            }
+        }
+    });
+}
+
+mapCalcsToCard();
