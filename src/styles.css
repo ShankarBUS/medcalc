@@ -1,0 +1,15 @@
+@import url('https://shankarbus.github.io/kaadu-ui/kaadu-ui.css');
+
+#calcUIColumn {
+    display: none;
+}
+
+.calc-ui {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: nowrap;
+    justify-content: space-between;
+    align-items: stretch;
+    gap: 10px;
+    width: 100%;
+}
