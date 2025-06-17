@@ -44,7 +44,17 @@ function getScheduleFromExposure(exposure) {
         return [`Day ${day}`, d.toLocaleDateString()];
     });
 
-    const scheduleObj = Object.fromEntries(schedule);
-    const table = createKeyValueTable(scheduleObj);
-    resultDiv.appendChild(table);
+    const list = document.createElement('ul');
+    schedule.forEach(item => {
+        const li = document.createElement('li');
+        const day = document.createElement('strong');
+        day.textContent = item[0];
+        const date = document.createElement('span');
+        date.textContent = item[1];
+        li.appendChild(day);
+        li.appendChild(date);
+        list.appendChild(li);
+    });
+    list.className = 'timeline-list';
+    resultDiv.appendChild(list);
 }

@@ -1,4 +1,5 @@
 @import url('https://shankarbus.github.io/kaadu-ui/kaadu-ui.css');
+@import url('radial-progress.css');
 
 #calcUIColumn {
     display: none;
@@ -12,4 +13,19 @@
     align-items: stretch;
     gap: 10px;
     width: 100%;
+}
+
+.group-header {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    justify-content: space-between;
+    align-items: center;
+    gap: 10px;
+}
+
+#backBtn {
+    height: 44px;
+    width: 44px;
+    align-self: flex-start;
 }

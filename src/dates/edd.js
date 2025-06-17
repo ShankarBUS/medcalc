@@ -1,6 +1,8 @@
 import { createKeyValueTable } from 'https://shankarbus.github.io/kaadu-ui/kaadu-ui.js';
+import '../radial-progress.js';
 
 let resultDiv;
+let radialProgress;
 
 export function createEddCalculator() {
     const title = 'Estimated Date of Delivery (EDD) Calculator';
@@ -23,6 +25,12 @@ export function createEddCalculator() {
     const button = document.createElement('button');
     button.textContent = 'Calculate';
     calcUI.appendChild(button);
+
+    radialProgress = document.createElement('radial-progress');
+    radialProgress.setAttribute('value', 0);
+    radialProgress.setAttribute('max', 100);
+    radialProgress.style.display = 'none';
+    calcUI.appendChild(radialProgress);
 
     resultDiv = document.createElement('div');
     calcUI.appendChild(resultDiv);
@@ -50,8 +58,15 @@ function getEDDFromLMP(lmp) {
     let gestAge = '';
     if (diffDays >= 0) {
         gestAge = `${weeks} week${weeks !== 1 ? 's' : ''}` + (days > 0 ? `, ${days} day${days !== 1 ? 's' : ''}` : '');
+        let gestPercent = Math.max(0, Math.min(100, Math.round((diffDays / 280) * 100)));
+        radialProgress.setAttribute('value', gestPercent);
+        radialProgress.setAttribute('label', `${weeks}w` + (days > 0 ? `+${days}d` : ''));
+        radialProgress.style.display = 'block';
     } else {
         gestAge = 'N/A';
+        radialProgress.setAttribute('value', 0);
+        radialProgress.setAttribute('label', 'N/A');
+        radialProgress.style.display = 'none';
     }
 
     const data = {
