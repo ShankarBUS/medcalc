@@ -38,7 +38,7 @@ function getScheduleFromExposure(exposure) {
 
     resultDiv.innerHTML = '';
 
-    const schedule = [0, 3, 7, 14, 28].map(day => {
+    const schedule = [0, 3, 7, 28].map(day => {
         const d = new Date(base);
         d.setDate(d.getDate() + day);
         return [`Day ${day}`, d.toLocaleDateString()];
