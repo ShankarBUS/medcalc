@@ -1,5 +1,16 @@
 @import url('https://shankarbus.github.io/kaadu-ui/kaadu-ui.css');
 
+:root {
+    --high-border-color: #ccccccee;
+    --low-text-color: #555;
+}
+
+@media (prefers-color-scheme: dark) {
+    :root {
+        --low-text-color: #999;
+    }
+}
+
 #calcUIColumn {
     display: none;
 }
@@ -21,10 +32,55 @@
     justify-content: space-between;
     align-items: center;
     gap: 10px;
+    width: 100%;
 }
 
-#backBtn {
-    height: 44px;
-    width: 44px;
+.icon-button {
+    height: 36px;
+    width: 36px;
     align-self: flex-start;
+    padding: 0px;
+}
+
+#markdownPopup .popup-content {
+    max-width: 80%;
+    max-height: 80%;
+}
+
+.markdown-body {
+    padding: 20px;
+    overflow: auto;
+    box-sizing: border-box;
+    text-align: left;
+}
+
+.markdown-body h1, .markdown-body h2, .markdown-body h3, .markdown-body h4, .markdown-body h5, .markdown-body h6 {
+    margin-top: 1em;
+    margin-bottom: 0.5em;
+}
+
+.markdown-body table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 1em;
+    margin-bottom: 1em;
+}
+
+.markdown-body th, .markdown-body td {
+    border: 1px solid var(--border-color);
+    padding: 6px 10px;
+    text-align: left;
+}
+
+.markdown-body hr {
+    border: none;
+    border-top: 1px solid var(--high-border-color);
+    margin: 20px 0;
+}
+
+.markdown-body blockquote {
+    border-left: 4px solid var(--border-color);
+    padding-left: 10px;
+    margin: 1em 0;
+    color: var(--low-text-color);
 }

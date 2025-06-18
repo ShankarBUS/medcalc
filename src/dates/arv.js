@@ -1,5 +1,3 @@
-import { createKeyValueTable } from 'https://shankarbus.github.io/kaadu-ui/kaadu-ui.js';
-
 let resultDiv;
 
 export function createArvCalculator() {
@@ -30,7 +28,12 @@ export function createArvCalculator() {
     input.onchange = () => getScheduleFromExposure(input.value);
     button.onclick = () => getScheduleFromExposure(input.value);
 
-    return {title: title, calcUI: calcUI};
+    return { title: title, calcUI: calcUI, doc: 'details/arv.md' };
+}
+
+function getOrdinal(n) {
+    const ordinals = ['1st', '2nd', '3rd', '4th'];
+    return ordinals[n] || `${n + 1}th`;
 }
 
 function getScheduleFromExposure(exposure) {
@@ -38,20 +41,20 @@ function getScheduleFromExposure(exposure) {
 
     resultDiv.innerHTML = '';
 
-    const schedule = [0, 3, 7, 28].map(day => {
+    const schedule = [0, 3, 7, 28].map((day, idx) => {
         const d = new Date(base);
         d.setDate(d.getDate() + day);
-        return [`Day ${day}`, d.toLocaleDateString()];
+        return [`${getOrdinal(idx)} dose (Day ${day})`, d.toLocaleDateString()];
     });
 
     const list = document.createElement('ul');
     schedule.forEach(item => {
         const li = document.createElement('li');
-        const day = document.createElement('strong');
-        day.textContent = item[0];
+        const dose = document.createElement('strong');
+        dose.textContent = item[0];
         const date = document.createElement('span');
         date.textContent = item[1];
-        li.appendChild(day);
+        li.appendChild(dose);
         li.appendChild(date);
         list.appendChild(li);
     });
