@@ -1,5 +1,5 @@
 import { createKeyValueTable } from 'https://shankarbus.github.io/kaadu-ui/kaadu-ui.js';
-import '../radial-progress.js';
+import { RadialProgress } from 'https://shankarbus.github.io/kaadu-ui/radial-progress.js';
 
 let resultDiv;
 let radialProgress;
@@ -26,7 +26,7 @@ export function createEddCalculator() {
     button.textContent = 'Calculate';
     calcUI.appendChild(button);
 
-    radialProgress = document.createElement('radial-progress');
+    radialProgress = new RadialProgress();
     radialProgress.setAttribute('value', 0);
     radialProgress.setAttribute('max', 100);
     radialProgress.style.display = 'none';
